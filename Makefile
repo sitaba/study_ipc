@@ -1,35 +1,37 @@
 
 CC     = gcc
 CFLAGS = -Wall
-TARGET = ready pipe named_pipe ipc posix-ipc socket shared_memory
+TARGET = random.txt pipe.exe named_pipe.exe ipc.exe posix-ipc.exe socket.exe shared_memory.exe
 
-.PHONY: clean
+.PHONY: clean ready
 
 
 all: $(TARGET)
 
 
-ready:
-	./ready_test_files.sh
+random.txt: ready_test_files.sh
+	./$^
 
-pipe: pipe.c
-	${CC} $^ -o $@.exe ${CFLAGS}
+pipe.exe: pipe.c
+	${CC} $^ -o $@ ${CFLAGS}
 
-named_pipe: named_pipe.c
-	${CC} $^ -o $@.exe ${CFLAGS}
+named_pipe.exe: named_pipe.c
+	${CC} $^ -o $@ ${CFLAGS}
 
-ipc: ipc.c
-	${CC} $^ -o $@.exe ${CFLAGS}
+ipc.exe: ipc.c
+	${CC} $^ -o $@ ${CFLAGS}
 
-posix-ipc: posix-ipc.c
-	${CC} $^ -o $@.exe ${CFLAGS}
+posix-ipc.exe: posix-ipc.c
+	${CC} $^ -o $@ ${CFLAGS}
 
-socket: socket.c
-	${CC} $^ -o $@.exe ${CFLAGS}
+socket.exe: socket.c
+	${CC} $^ -o $@ ${CFLAGS}
 
-shared_memory: shared_memory.c
-	${CC} $^ -o $@.exe ${CFLAGS}
+shared_memory.exe: shared_memory.c
+	${CC} $^ -o $@ ${CFLAGS}
 
+
+ready: random.txt
 
 clean:
 	-rm *.exe *.txt
